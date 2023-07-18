@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.weatherapp.details.WeatherDetailsViewModel" />
+
+        <variable
+            name="cardViewLines"
+            type="com.example.weatherapp.details.CardViewLines" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sunrise"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardBackgroundColor="#A9A9B8" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_gravity="top|center_horizontal"
+                app:bitmap="@{cardViewLines.drawable}"
+                tools:src="@drawable/baseline_wb_sunny_24" />
+
+            <TextView
+                android:id="@+id/sunriseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cardViewLines.property}"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                tools:text="Sunrise"/>
+
+            <TextView
+                android:id="@+id/sunriseTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cardViewLines.property_detail}"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                tools:text="06:40 AM"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

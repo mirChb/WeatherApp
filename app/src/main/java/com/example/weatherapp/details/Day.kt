@@ -1,5 +1,9 @@
 package com.example.weatherapp.details
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Day(
     val avghumidity: Double,
     val avgtemp_c: Double,
@@ -21,4 +25,10 @@ data class Day(
     val totalprecip_mm: Double,
     val totalsnow_cm: Double,
     val uv: Double
-)
+): Parcelable {
+    val mintemp_c_string
+        get() = "Min Temp: ${mintemp_c}°C"
+
+    val maxtemp_c_string
+        get() = "Max Temp: ${maxtemp_c}°C"
+}

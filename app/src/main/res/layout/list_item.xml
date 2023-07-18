@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout">
+
+    <data>
+        <variable
+            name="searchItem"
+            type="com.example.weatherapp.search.SearchItem" />
+
+        <variable
+            name="clickListener"
+            type="com.example.weatherapp.search.SearchClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.example.weatherapp.search.SearchFragment"
+        android:background="@drawable/search_item_bg"
+        android:onClick="@{() -> clickListener.onClick(searchItem)}"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/chapter_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="20dp"
+            android:text="@{searchItem.fullname}"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center_vertical"
+            tools:text="Beirut, Lebanon"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
