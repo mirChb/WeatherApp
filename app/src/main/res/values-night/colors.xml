@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="darkBgTop">#2C3333</color>
+    <color name="darkBgBottom">#395B64</color>
+    <color name="darkCardColor">#A5C9CA</color>
 </resources>

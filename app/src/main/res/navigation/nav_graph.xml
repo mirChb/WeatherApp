@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/search">
+
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.weatherapp.search.SearchFragment"
+        android:label="Search Location"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_to_detailedWeather"
+            app:destination="@id/detailedWeather" />
+    </fragment>
+
+    <fragment android:id="@+id/detailedWeather" android:name="com.example.weatherapp.details.WeatherDetailsFragment"
+        android:label="Weather Detailed Forecast" tools:layout="@layout/fragment_weather_details">
+        <argument
+            android:name="selectedSearchItem"
+            app:argType="com.example.weatherapp.search.SearchItem" />
+        <argument
+            android:name="isDarkModeEnabled"
+            app:argType="boolean" />
+    </fragment>
+
+
+</navigation>
