@@ -1,22 +1,21 @@
 package com.example.weatherapp.search
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentSearchBinding
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     lateinit var binding: FragmentSearchBinding
@@ -27,42 +26,20 @@ class SearchFragment : Fragment() {
 
     private var darkOrLight = false
 
+    private var isDarkOrLight = context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        darkOrLight = (isDarkOrLight==Configuration.UI_MODE_NIGHT_NO)
 
         binding = FragmentSearchBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-
         binding.searchBar.addTextChangedListener { onType() }
 
-        binding.locationsList.adapter = SearchAdapter(SearchClickListener {
-            viewModel.displayDetails(it)
-        })
-
-        viewModel.imageViewSrcCompat.observe(viewLifecycleOwner, Observer { drawableResId ->
-            binding.floatingBtn.setImageResource(drawableResId)
-        })
-
-        viewModel.backgroundResId.observe(viewLifecycleOwner, Observer { resId ->
-            binding.searchConstraintId.setBackgroundResource(resId)
-        })
-
-//        binding.floatingBtn.setOnClickListener {
-//            viewModel.onFloatingBtnClicked()
-//        }
-
-        viewModel.isDarkModeEnabled.observe(viewLifecycleOwner, Observer { isDarkModeEnabled ->
-            darkOrLight = isDarkModeEnabled
-        })
-
-
-        viewModel.navigateTo.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                this.findNavController().navigate(SearchFragmentDirections.actionSearchToDetailedWeather(it, darkOrLight))
-                viewModel.displayDetailsDone()
-            }
-        })
+        setUpObservers()
+        setUpClickListeners()
 
         return binding.root
     }
@@ -72,6 +49,41 @@ class SearchFragment : Fragment() {
         if (search.isNotEmpty()) {
             viewModel.getProperties(search.toString())
         }
+    }
+
+    private fun setUpObservers() {
+        viewModel.navigateTo.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                this.findNavController().navigate(SearchFragmentDirections.actionSearchToDetailedWeather(it))
+                viewModel.displayDetailsDone()
+            }
+        })
+    }
+
+    private fun setUpClickListeners() {
+        binding.floatingBtn.setOnClickListener {
+            onFloatingBtnClicked(requireContext())
+        }
+
+        binding.locationsList.adapter = SearchAdapter(SearchClickListener {
+            viewModel.displayDetails(it)
+        })
+    }
+
+    private fun onFloatingBtnClicked(context: Context) {
+        val uiMode = context.resources.configuration.uiMode
+        var isDarkMode = (uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+
+        isDarkMode = !isDarkMode
+
+        val newNightMode = if (isDarkMode) {
+            AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            AppCompatDelegate.MODE_NIGHT_NO
+        }
+
+        AppCompatDelegate.setDefaultNightMode(newNightMode)
+
     }
 
 }

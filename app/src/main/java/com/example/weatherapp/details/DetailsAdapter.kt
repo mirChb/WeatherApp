@@ -7,21 +7,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.WeatherDetailsItemBinding
 
-class DetailsAdapter() : ListAdapter<CardViewLines, DetailsAdapter.CardViewHolder>(DiffCallback) {
-
-    companion object DiffCallback: DiffUtil.ItemCallback<CardViewLines>() {
-        override fun areItemsTheSame(oldItem: CardViewLines, newItem: CardViewLines): Boolean {
+class DetailsAdapter() : ListAdapter<CardViewText, DetailsAdapter.CardViewHolder>(DiffCallback) {
+    companion object DiffCallback: DiffUtil.ItemCallback<CardViewText>() {
+        override fun areItemsTheSame(oldItem: CardViewText, newItem: CardViewText): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: CardViewLines, newItem: CardViewLines): Boolean {
+        override fun areContentsTheSame(oldItem: CardViewText, newItem: CardViewText): Boolean {
             return oldItem.property == newItem.property
         }
     }
 
     class CardViewHolder(private var binding: WeatherDetailsItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(cardViewLines: CardViewLines) {
-            binding.cardViewLines = cardViewLines
+        fun bind(cardViewText: CardViewText) {
+            binding.cardViewText = cardViewText
             binding.executePendingBindings()
         }
     }
@@ -33,4 +32,9 @@ class DetailsAdapter() : ListAdapter<CardViewLines, DetailsAdapter.CardViewHolde
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
+    fun setDetailsList(details: List<CardViewText>) {
+        submitList(details)
+    }
+
 }

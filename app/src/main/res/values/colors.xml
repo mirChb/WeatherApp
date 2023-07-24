@@ -11,4 +11,7 @@
     <color name="darkBgTop">#2C3333</color>
     <color name="darkBgBottom">#395B64</color>
     <color name="darkCardColor">#A5C9CA</color>
+    <color name="bgEndColor">#192a64</color>
+    <color name="bgStartColor">#8c6096</color>
+    <color name="cardColor">#A9A9B8</color>
 </resources>

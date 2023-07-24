@@ -29,11 +29,13 @@ private val retrofit = Retrofit.Builder()
 interface WeatherApiService {
     @GET("search.json?key=87f3ecafe1674392ac3143139230507")
     fun getProperties(@Query("q") query: String?): Deferred<List<SearchItem>>
-        //return retrofit.create(WeatherApiService::class.java).getProperties(query)  // wait to see if correct
-
 
     @GET("forecast.json?key=87f3ecafe1674392ac3143139230507")
     fun getDetails(@Query("q") query: String?): Deferred<CurrentWeather>
+
+    @GET("forecast.json?key=87f3ecafe1674392ac3143139230507")
+    fun getSevenDaysForecast(@Query("q") query: String?, @Query("days") days: String?): Deferred<CurrentWeather>
+
 }
 
 object WeatherApi {

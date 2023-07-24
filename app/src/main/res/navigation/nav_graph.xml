@@ -20,9 +20,19 @@
         <argument
             android:name="selectedSearchItem"
             app:argType="com.example.weatherapp.search.SearchItem" />
+        <action
+            android:id="@+id/action_detailedWeather_to_sevenDays"
+            app:destination="@id/sevenDays" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sevenDays"
+        android:name="com.example.weatherapp.sevenDaysForecast.SevenDaysForecastFragment"
+        android:label="Seven Days Forecast"
+        tools:layout="@layout/fragment_seven_days_forecast">
         <argument
-            android:name="isDarkModeEnabled"
-            app:argType="boolean" />
+            android:name="selectedSearchItem"
+            app:argType="com.example.weatherapp.search.SearchItem" />
     </fragment>
 
 

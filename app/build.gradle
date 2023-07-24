@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'com.google.dagger.hilt.android'
+
 
 android {
     compileSdkVersion 33
@@ -60,9 +62,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
 
-    // Core with ktx
-    implementation 'androidx.core:core-ktx:1.10.1'
-
     // Moshi
     implementation "com.squareup.moshi:moshi:1.14.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
@@ -83,5 +82,10 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:2.5.2"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
 }
+
 

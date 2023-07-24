@@ -6,55 +6,61 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.weatherapp.details.WeatherDetailsViewModel" />
+            type="com.example.weatherapp.sevenDaysForecast.SevenDaysForecastViewModel" />
 
         <variable
-            name="cardViewLines"
-            type="com.example.weatherapp.details.CardViewLines" />
+            name="cardViewText"
+            type="com.example.weatherapp.sevenDaysForecast.SevenDaysCardViewText" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/sunrise"
-        android:layout_width="110dp"
-        android:layout_height="80dp"
+        android:id="@+id/sevenDaysCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:cardPreventCornerOverlap="true"
-        app:cardBackgroundColor="@color/darkCardColor">
+        app:cardBackgroundColor="@color/cardColor" >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="5dp">
 
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="top|center_horizontal"
-                app:bitmap="@{cardViewLines.drawable}"
-                tools:src="@drawable/baseline_wb_sunny_24" />
+                android:text="@{cardViewText.date}"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                tools:text="Today" />
 
             <TextView
-                android:id="@+id/sunriseText"
+                android:id="@+id/sevenDaysMinTempText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cardViewLines.property}"
+                android:text="@{cardViewText.propertyMin}"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                tools:text="Sunrise"/>
+                android:padding="7dp"
+                tools:text="Min Temp: 15 C"/>
 
             <TextView
-                android:id="@+id/sunriseTime"
+                android:id="@+id/sevenDaysMaxTempText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cardViewLines.property_detail}"
+                android:text="@{cardViewText.propertyMax}"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                tools:text="06:40 AM"/>
+                android:padding="7dp"
+                tools:text="Max Temp: 30 C"/>
 
         </LinearLayout>
 
