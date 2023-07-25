@@ -9,8 +9,8 @@
             type="com.example.weatherapp.details.WeatherDetailsViewModel" />
 
         <variable
-            name="cardViewLines"
-            type="com.example.weatherapp.details.CardViewLines" />
+            name="cardViewText"
+            type="com.example.weatherapp.details.CardViewText" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -21,7 +21,7 @@
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:cardPreventCornerOverlap="true"
-        app:cardBackgroundColor="#A9A9B8" >
+        app:cardBackgroundColor="@color/cardColor" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,14 +33,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:layout_gravity="top|center_horizontal"
-                app:bitmap="@{cardViewLines.drawable}"
+                app:src="@{cardViewText.drawbleDetails}"
                 tools:src="@drawable/baseline_wb_sunny_24" />
 
             <TextView
                 android:id="@+id/sunriseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cardViewLines.property}"
+                android:text="@{cardViewText.property}"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
@@ -50,7 +50,7 @@
                 android:id="@+id/sunriseTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{cardViewLines.property_detail}"
+                android:text="@{cardViewText.property_detail}"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"

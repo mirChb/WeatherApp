@@ -18,10 +18,5 @@ data class SearchItem(
         get() = "$name, $region, $country"
 }
 
-//data class SearchResponse(
-//    @Json(name="_filters") val filters: Filter,
-//    @Json(name="data") val locations: List<SearchItem>
-//)
-
 @Parcelize
 class SearchResponse(val locations: List<SearchItem>) : Parcelable

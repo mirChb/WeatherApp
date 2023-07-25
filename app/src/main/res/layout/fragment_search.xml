@@ -66,8 +66,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            app:srcCompat="@drawable/baseline_dark_mode_24"
-            android:onClick="@{() -> viewModel.onFloatingBtnClicked()}" />
+            app:srcCompat="@drawable/lightordark_white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

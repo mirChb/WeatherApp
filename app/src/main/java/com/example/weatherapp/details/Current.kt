@@ -42,5 +42,5 @@ data class Current(
         get() = "$pressure_mb mb"
 
     val humidity_string
-        get() = "${humidity}%"
+        get() = "${humidity} %"
 }
