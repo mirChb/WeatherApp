@@ -1,7 +1,9 @@
 package com.example.weatherapp.network
 
+import android.util.Log
 import com.example.weatherapp.details.CurrentWeather
 import com.example.weatherapp.details.Location
+import com.example.weatherapp.history.History
 import com.example.weatherapp.search.SearchItem
 import com.example.weatherapp.search.SearchResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -35,6 +37,9 @@ interface WeatherApiService {
 
     @GET("forecast.json?key=87f3ecafe1674392ac3143139230507")
     fun getSevenDaysForecast(@Query("q") query: String?, @Query("days") days: String?): Deferred<CurrentWeather>
+
+    @GET("history.json?key=87f3ecafe1674392ac3143139230507")
+    fun getHistory(@Query("q") query: String?, @Query("dt") date: String): Deferred<History>
 
 }
 

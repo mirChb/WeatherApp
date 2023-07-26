@@ -5,18 +5,18 @@
 
     <data>
         <variable name="viewModel"
-            type="com.example.weatherapp.sevenDaysForecast.SevenDaysForecastViewModel" />
+            type="com.example.weatherapp.history.HistoryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sevenDaysConstLayout"
+        android:id="@+id/historyConstLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/custom_gradient"
-        tools:context=".sevenDaysForecast.SevenDaysForecastFragment">
+        tools:context=".history.HistoryFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/sevenDaysGridList"
+            android:id="@+id/historyGridList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,11 +24,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:gravity="center"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:spanCount="1"
-            tools:itemCount="3"
-            tools:listitem="@layout/seven_days_item"
-            app:listWeatherCard="@{viewModel.propertiesList}" >
+            app:spanCount="2"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            tools:listitem="@layout/history_item"
+            app:listHistory="@{viewModel.propertiesList}" >
 
         </androidx.recyclerview.widget.RecyclerView>
 

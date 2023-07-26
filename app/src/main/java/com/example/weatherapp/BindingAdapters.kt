@@ -1,15 +1,19 @@
 package com.example.weatherapp
 
-import android.graphics.Bitmap
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.weatherapp.details.DetailsAdapter
 import com.example.weatherapp.details.CardViewText
 import com.example.weatherapp.details.DrawableDetails
+import com.example.weatherapp.history.HistoryAdapter
+import com.example.weatherapp.history.HistoryCardView
 import com.example.weatherapp.search.SearchAdapter
 import com.example.weatherapp.search.SearchApiStatus
 import com.example.weatherapp.search.SearchItem
@@ -28,11 +32,33 @@ fun bindGridRecyclerView(recyclerView: RecyclerView, data: List<CardViewText>?) 
     adapter.submitList(data)
 }
 
-@BindingAdapter("listWeather")
+@BindingAdapter("listWeatherCard")
 fun bindSevenDaysList(recyclerView: RecyclerView, list: LiveData<List<SevenDaysCardViewText>>?) {
     list?.let {
         val adapter = recyclerView.adapter as SevenDaysAdapter
         adapter.submitList(it.value)
+    }
+}
+
+@BindingAdapter("listHistory")
+fun bindHistoryRecyclerView(recyclerView: RecyclerView, data: LiveData<List<HistoryCardView>>?) {
+    data?.let {
+        val adapter = recyclerView.adapter as HistoryAdapter
+        adapter.submitList(it.value)
+    }
+}
+
+@BindingAdapter("imageUrl")
+fun bindImage(imgView: ImageView, imgUrl: String?) {
+    imgUrl?.let {
+        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+        Glide.with(imgView.context)
+            .load(imgUri)
+            .apply(
+                RequestOptions()
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.baseline_broken_image_24))
+            .into(imgView)
     }
 }
 

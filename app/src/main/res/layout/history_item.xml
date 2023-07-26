@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.weatherapp.history.HistoryViewModel" />
+
+        <variable
+            name="cardView"
+            type="com.example.weatherapp.history.HistoryCardView" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/historyCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardBackgroundColor="@color/cardColor" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center_horizontal"
+                android:text="@{cardView.date}"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:paddingStart="7dp"
+                android:paddingEnd="7dp"
+                tools:text="Today" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:imageUrl="@{cardView.icon}"
+                android:layout_gravity="center_horizontal"
+                tools:srcCompat="@drawable/sunny" />
+
+            <TextView
+                android:id="@+id/historyMaxTempText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cardView.propertyTemp}"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:padding="7dp"
+                tools:text="Max Temp: 30 C"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

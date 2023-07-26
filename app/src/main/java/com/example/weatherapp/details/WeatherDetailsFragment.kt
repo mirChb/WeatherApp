@@ -21,14 +21,13 @@ class WeatherDetailsFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this).get(WeatherDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this)[WeatherDetailsViewModel::class.java]
 
         val searchItemFrag = WeatherDetailsFragmentArgs.fromBundle(requireArguments()).selectedSearchItem
         viewModel.setSearchItem(searchItemFrag)
 
         binding.viewModel = viewModel
         binding.gridList.adapter = DetailsAdapter()
-
 
         binding.sevenDays.setOnClickListener {
             viewModel.onSevenDaysClicked(searchItemFrag)
@@ -41,6 +40,23 @@ class WeatherDetailsFragment : Fragment() {
             }
         })
 
+        binding.history.setOnClickListener {
+            viewModel.onHistoryClicked(searchItemFrag)
+        }
+
+        viewModel.navigateToHistory.observe(viewLifecycleOwner, Observer { currentWeather ->
+            if (currentWeather != null) {
+                this.findNavController().navigate(WeatherDetailsFragmentDirections.actionDetailedWeatherToHistory(searchItemFrag))
+                viewModel.onHistoryDone()
+            }
+        })
+
+//        viewModel.navigateToSearch.observe(viewLifecycleOwner, Observer {
+//            if (it != null) {
+//                this.findNavController().navigate(WeatherDetailsFragmentDirections.actionDetailedWeatherToSearch())
+//                viewModel.onSearchNavigationDone()
+//            }
+//        })
 
         return binding.root
 

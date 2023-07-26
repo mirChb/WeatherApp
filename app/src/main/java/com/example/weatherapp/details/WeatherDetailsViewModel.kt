@@ -35,12 +35,32 @@ class WeatherDetailsViewModel: ViewModel() {
     val navigateToSevenDays: LiveData<SearchItem?>
         get() = _navigateToSevenDays
 
+    private val _navigateToSearch = MutableLiveData<String?>()
+    val navigateToSearch: LiveData<String?>
+        get() = _navigateToSearch
+
     fun onSevenDaysClicked(currentWeather: SearchItem) {
         _navigateToSevenDays.value = currentWeather
     }
 
     fun onSevenDaysNavigationDone() {
         _navigateToSevenDays.value = null
+    }
+
+    fun onSearchNavigationDone() {
+        _navigateToSevenDays.value = null
+    }
+
+    private val _navigateToHistory = MutableLiveData<SearchItem?>()
+    val navigateToHistory: LiveData<SearchItem?>
+        get() = _navigateToHistory
+
+    fun onHistoryClicked(currentWeather: SearchItem) {
+        _navigateToHistory.value = currentWeather
+    }
+
+    fun onHistoryDone() {
+        _navigateToHistory.value = null
     }
 
     fun getWeather(query: String) {
