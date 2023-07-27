@@ -5,15 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.network.WeatherApi
 import com.example.weatherapp.search.SearchItem
+import com.example.weatherapp.search.SearchRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.lang.Math.min
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class HistoryViewModel: ViewModel() {
+@HiltViewModel
+class HistoryViewModel @Inject constructor(private val repository: SearchRepository): ViewModel() {
     private val _searchItem = MutableLiveData<SearchItem?>()
     val searchItem: LiveData<SearchItem?>
         get() = _searchItem
@@ -49,7 +51,7 @@ class HistoryViewModel: ViewModel() {
 
                     Log.i("HistoryViewModel", "date: $date")
 
-                    val response = WeatherApi.reftrofitService.getHistory(filter, date).await()
+                    val response = repository.getHistory(filter, date).await()
 
                     response.forecast?.forecastday?.get(0)?.hour?.get(i)?.let { hourData ->
                         val time = hourData.time
