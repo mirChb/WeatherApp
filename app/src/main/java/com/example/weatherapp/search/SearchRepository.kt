@@ -1,21 +1,13 @@
 package com.example.weatherapp.search
 
 
-import com.example.weatherapp.network.WeatherApiService
-import kotlinx.coroutines.*
+import com.example.weatherapp.network.WeatherApiHelper
 import javax.inject.Inject
 
-class SearchRepository @Inject constructor(private val weatherApiService: WeatherApiService) {
+class SearchRepository @Inject constructor(private val apiHelper: WeatherApiHelper) {
+    fun getDetails(query: String) = apiHelper.getDetails(query)
+    fun getProperties(query: String) = apiHelper.getProperties(query)
+    fun getSevenDaysForecast(query: String, days: String) = apiHelper.getSevenDaysForecast(query, days)
+    fun getHistory(query: String, date: String) = apiHelper.getHistory(query, date)
 
-    var isFullyInitialized = false
-        private set
-
-    suspend fun getProperties(q: String): Deferred<List<SearchItem>> {
-        val result = coroutineScope {
-            val deferred = async { weatherApiService.getProperties(q) }
-            deferred.await()
-        }
-        isFullyInitialized = true
-        return result
-    }
 }

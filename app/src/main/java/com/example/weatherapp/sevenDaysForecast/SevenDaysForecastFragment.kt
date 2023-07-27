@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.databinding.FragmentSevenDaysForecastBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SevenDaysForecastFragment :  Fragment() {
 
     private lateinit var viewModel: SevenDaysForecastViewModel

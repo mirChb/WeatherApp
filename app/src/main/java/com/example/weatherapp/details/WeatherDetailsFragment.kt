@@ -1,7 +1,6 @@
 package com.example.weatherapp.details
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.databinding.FragmentWeatherDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WeatherDetailsFragment : Fragment() {
 
     private lateinit var viewModel: WeatherDetailsViewModel
@@ -50,13 +51,6 @@ class WeatherDetailsFragment : Fragment() {
                 viewModel.onHistoryDone()
             }
         })
-
-//        viewModel.navigateToSearch.observe(viewLifecycleOwner, Observer {
-//            if (it != null) {
-//                this.findNavController().navigate(WeatherDetailsFragmentDirections.actionDetailedWeatherToSearch())
-//                viewModel.onSearchNavigationDone()
-//            }
-//        })
 
         return binding.root
 
