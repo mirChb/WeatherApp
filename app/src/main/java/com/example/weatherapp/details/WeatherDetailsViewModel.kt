@@ -4,11 +4,14 @@ import androidx.lifecycle.*
 import com.example.weatherapp.network.WeatherApi
 import com.example.weatherapp.search.SearchApiStatus
 import com.example.weatherapp.search.SearchItem
+import com.example.weatherapp.search.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
+import javax.inject.Inject
 
-class WeatherDetailsViewModel: ViewModel() {
+@HiltViewModel
+class WeatherDetailsViewModel @Inject constructor(private val repository: SearchRepository): ViewModel() {
 
     private val _searchItem = MutableLiveData<SearchItem?>()
     val searchItem: LiveData<SearchItem?>
@@ -67,7 +70,7 @@ class WeatherDetailsViewModel: ViewModel() {
         viewModelScope.launch {
             _status.value = SearchApiStatus.LOADING
             try {
-                _properties.value = WeatherApi.reftrofitService.getDetails(query).await()
+                _properties.value = repository.getDetails(query).await()
                 _status.value = SearchApiStatus.DONE
                 show()
             } catch (e: IOException) {
